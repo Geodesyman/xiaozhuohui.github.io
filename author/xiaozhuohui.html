@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+        <title>xiaozhuohui - xiaozhuohui</title>
+        <link rel="stylesheet" href="df/theme/css/main.css" />
+        <link href="df/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="xiaozhuohui Atom Feed" />
+
+        <!--[if IE]>
+            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="df/">xiaozhuohui </a></h1>
+                <nav><ul>
+                    <li><a href="df/category/ubuntu.html">Ubuntu</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+
+            <aside id="featured" class="body">
+                <article>
+                    <h1 class="entry-title"><a href="df/ubuntu1404ltsan-zhuang-pelican-elegantzhu-ti.html">Ubuntu14.04LTS安装Pelican elegant主题</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2014-05-03T00:00:00+02:00">
+                Published: 周六 03 五月 2014
+        </abbr>
+		<br />
+        <abbr class="modified" title="2014-05-04T00:00:00+02:00">
+                Updated: 周日 04 五月 2014
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="df/author/xiaozhuohui.html">xiaozhuohui</a>
+        </address>
+<p>In <a href="df/category/ubuntu.html">Ubuntu</a>. </p>
+<p>tags: <a href="df/tag/ubuntu.html">Ubuntu</a> <a href="df/tag/pelican.html">Pelican</a> </p>
+</footer><!-- /.post-info --><h3>一. 安装软件及环境准备:</h3>
+<h4>1.软件安装:</h4>
+<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install python-pip
+<span class="nv">$ </span>sudo apt-get install python-virtualenv
+<span class="nv">$ </span>virtualenv ~/virtualenvs/pelican
+<span class="nv">$ </span><span class="nb">cd</span> ~/virtualenvs/pelican
+<span class="nv">$ </span>. bin/activate
+<span class="nv">$ </span>pip install -e git://github.com/getpelican/pelican#egg<span class="o">=</span>pelican
+<span class="nv">$ </span>pip install Markdown
+<span class="nv">$ </span>mkdir blog
+<span class="nv">$ </span><span class="nb">cd </span>blog
+<span class="nv">$ </span>pelican-quikstart
+</pre></div>
+
+
+<div class="highlight"><pre>blog/
+<span class="p">|</span>--content <span class="c">#存储所写的blog文件目录，</span>
+<span class="p">|</span>   └──（blog pages<span class="o">)</span> <span class="c">#博客文件，如*.md后缀的文件</span>
+<span class="p">|</span>--output <span class="c">#执行make publish之后，会将博客文件转换成相应的html文件及相应的存储目录</span>
+<span class="p">|</span>   └──.git <span class="c">#执行git init之后，产生的远程仓库目录</span>
+<span class="p">|</span>   └──author <span class="c">#作者目录，存放pelicanconf.py中指定的Author文件</span>
+<span class="p">|</span>   └──category <span class="c">#分类目录，默认目录文件为misc，在编辑器中指定</span>
+<span class="p">|</span>   └──feeds <span class="c">#目录，pelicanconf.py中FEED_RSS指定的XML文件</span>
+<span class="p">|</span>   └──pages <span class="c">#目录，pelicanconf.py中ARTICLE_URL指定格式分类文件</span>
+<span class="p">|</span>   └──tag <span class="c">#目录，存放编辑器开头所指定的Tag</span>
+<span class="p">|</span>   └──theme <span class="c">#目录，存放博客模板文件</span>
+<span class="p">|</span>   └──archives.html,authors.html,categories.html,index.html, tags.html
+<span class="p">|</span>——pelican-plugins <span class="c">#目录，pelican插件</span>
+<span class="p">|</span>——develop_server.sh <span class="c">#pelican简易web服务器操作文件</span>
+<span class="p">|</span>——fabfile.py <span class="c"># 与make类似，可用fab publish, fab server命令</span>
+<span class="p">|</span>——Makefile <span class="c">#make 命令文件</span>
+<span class="p">|</span>——pelicanconf.py <span class="c">#主要的pelican配置文件</span>
+<span class="p">|</span>——publishconf.py <span class="c">#发布配置文件,可有可无</span>
+</pre></div>
+
+
+<h4>2.文章模板如下：</h4>
+<div class="highlight"><pre>Title: Ubuntu14.04LTS安装Pelican elegant主题
+Date: 2014-05-03
+Category: Ubuntu
+Tags: Ubuntu,Theme
+
+This is my first page.
+</pre></div>
+
+
+<h4>3. 编译page</h4>
+<div class="highlight"><pre><span class="nv">$ </span>make html  <span class="c">#出现错误,修改pelicanconf.py</span>
+<span class="nv">$ </span>make publish
+<span class="nv">$ </span>make serve <span class="c">#查看 http://localhost:8000</span>
+</pre></div>
+
+
+<h4>4.创建一个页面</h4>
+<p>这里以创建 About页面为例,在content目录创建pages目录</p>
+<div class="highlight"><pre><span class="nv">$ </span>mkdir content/pages
+</pre></div>
+
+
+<p>然后创建About.md并填入下面内容</p>
+<div class="highlight"><pre>Title: About Me
+Date: 2013-05-03
+
+About me content
+</pre></div>
+
+
+<p>执行 make html 生成html, 然后打http://localhost:8000查看效果.</p>
+<h4>5.推送到github网页:</h4>
+<div class="highlight"><pre><span class="nv">$ </span><span class="nb">cd </span>output
+<span class="nv">$ </span>git init
+<span class="nv">$ </span>git add .
+<span class="nv">$ </span>git remote add origin  https://github.com/xiaoledeng/xiaoledeng.github.io
+<span class="nv">$ </span>git pull origin master
+<span class="nv">$ </span>git add .
+<span class="nv">$ </span>git commit -m <span class="s2">&quot;your message&quot;</span>
+<span class="nv">$ </span>git push --force origin master
+</pre></div>
+
+
+<h3>二. 安装pelican-elegant主题:</h3>
+<p>复制 <a href="http://pan.baidu.com/s/1kTt6GOR">pelican-elegant-1.3</a>文件夹到pelican目录下</p>
+<p>在pelicanconf.py中添加</p>
+<div class="highlight"><pre><span class="nv">THEME</span> <span class="o">=</span> <span class="s1">&#39;pelican-elegant-1.3&#39;</span>
+</pre></div>
+
+
+<p>然后重新make publish即可</p>
+<h3>三. 谷歌分析:</h3>
+<p>去Google Analytics申请账号，记下跟踪ID。
+在pelicanconf.py添加</p>
+<div class="highlight"><pre><span class="nv">GOOGLE_ANALYTICS</span> <span class="o">=</span> <span class="s1">&#39;跟踪ID&#39;</span> 
+</pre></div>
+
+
+<h2>Reference:</h2>
+<p>1.<a href="http://blog.csdn.net/zwjlpeng/article/details/16918289">http://blog.csdn.net/zwjlpeng/article/details/16918289</a></p>
+<p>2.<a href="http://blog.csdn.net/zwjlpeng/article/details/18010345">http://blog.csdn.net/zwjlpeng/article/details/18010345</a></p>
+<p>3.<a href="http://www.dongxf.com/3_Build_Personal_Blog_With_Pelican_And_GitHub_Pages.html">http://www.dongxf.com/3_Build_Personal_Blog_With_Pelican_And_GitHub_Pages.html</a></p>
+<p>4.<a href="http://akenzc.com/how-to-build-a-blog-with-pelican.html">http://akenzc.com/how-to-build-a-blog-with-pelican.html</a></p>                </article>
+<p class="paginator">
+    Page 1 / 1
+</p>
+            </aside><!-- /#featured -->
+        <section id="extras" class="body">
+                <div class="blogroll">
+                        <h2>blogroll</h2>
+                        <ul>
+                            <li><a href="http://getpelican.com/">Pelican</a></li>
+                            <li><a href="http://python.org/">Python.org</a></li>
+                            <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+                            <li><a href="#">You can modify those links in your config file</a></li>
+                        </ul>
+                </div><!-- /.blogroll -->
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+                            <li><a href="df/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+
+                            <li><a href="#">You can add links in your config file</a></li>
+                            <li><a href="#">Another social link</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>

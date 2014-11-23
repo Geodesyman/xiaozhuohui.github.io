@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>xiaozhuohui</title><link href="df/" rel="alternate"></link><link href="df/feeds/ubuntu.atom.xml" rel="self"></link><id>df/</id><updated>2014-05-04T00:00:00+02:00</updated><entry><title>Ubuntu14.04LTS安装Pelican elegant主题</title><link href="df/ubuntu1404ltsan-zhuang-pelican-elegantzhu-ti.html" rel="alternate"></link><updated>2014-05-04T00:00:00+02:00</updated><author><name>xiaozhuohui</name></author><id>tag:,2014-05-03:df/ubuntu1404ltsan-zhuang-pelican-elegantzhu-ti.html</id><summary type="html">&lt;h3&gt;一. 安装软件及环境准备:&lt;/h3&gt;
+&lt;h4&gt;1.软件安装:&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install python-pip
+&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install python-virtualenv
+&lt;span class="nv"&gt;$ &lt;/span&gt;virtualenv ~/virtualenvs/pelican
+&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; ~/virtualenvs/pelican
+&lt;span class="nv"&gt;$ &lt;/span&gt;. bin/activate
+&lt;span class="nv"&gt;$ &lt;/span&gt;pip install -e git://github.com/getpelican/pelican#egg&lt;span class="o"&gt;=&lt;/span&gt;pelican
+&lt;span class="nv"&gt;$ &lt;/span&gt;pip install Markdown
+&lt;span class="nv"&gt;$ &lt;/span&gt;mkdir blog
+&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;cd &lt;/span&gt;blog
+&lt;span class="nv"&gt;$ &lt;/span&gt;pelican-quikstart
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;div class="highlight"&gt;&lt;pre&gt;blog/
+&lt;span class="p"&gt;|&lt;/span&gt;--content &lt;span class="c"&gt;#存储所写的blog文件目录，&lt;/span&gt;
+&lt;span class="p"&gt;|&lt;/span&gt;   └──（blog pages&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="c"&gt;#博客文件，如*.md后缀的文件&lt;/span&gt;
+&lt;span class="p"&gt;|&lt;/span&gt;--output &lt;span class="c"&gt;#执行make publish之后，会将博客文件转换成相应的html文件及相应的存储目录&lt;/span&gt;
+&lt;span class="p"&gt;|&lt;/span&gt;   └──.git &lt;span class="c"&gt;#执行git init之后，产生的远程仓库目录&lt;/span&gt;
+&lt;span class="p"&gt;|&lt;/span&gt;   └──author &lt;span class="c"&gt;#作者目录，存放pelicanconf.py中指定的Author文件&lt;/span&gt;
+&lt;span class="p"&gt;|&lt;/span&gt;   └──category &lt;span class="c"&gt;#分类目录，默认目录文件为misc，在编辑器中指定&lt;/span&gt;
+&lt;span class="p"&gt;|&lt;/span&gt;   └──feeds &lt;span class="c"&gt;#目录，pelicanconf.py中FEED_RSS指定的XML文件&lt;/span&gt;
+&lt;span class="p"&gt;|&lt;/span&gt;   └──pages &lt;span class="c"&gt;#目录，pelicanconf.py中ARTICLE_URL指定格式分类文件&lt;/span&gt;
+&lt;span class="p"&gt;|&lt;/span&gt;   └──tag &lt;span class="c"&gt;#目录，存放编辑器开头所指定的Tag&lt;/span&gt;
+&lt;span class="p"&gt;|&lt;/span&gt;   └──theme &lt;span class="c"&gt;#目录，存放博客模板文件&lt;/span&gt;
+&lt;span class="p"&gt;|&lt;/span&gt;   └──archives.html,authors.html,categories.html,index.html, tags.html
+&lt;span class="p"&gt;|&lt;/span&gt;——pelican-plugins &lt;span class="c"&gt;#目录，pelican插件&lt;/span&gt;
+&lt;span class="p"&gt;|&lt;/span&gt;——develop_server.sh &lt;span class="c"&gt;#pelican简易web服务器操作文件&lt;/span&gt;
+&lt;span class="p"&gt;|&lt;/span&gt;——fabfile.py &lt;span class="c"&gt;# 与make类似，可用fab publish, fab server命令&lt;/span&gt;
+&lt;span class="p"&gt;|&lt;/span&gt;——Makefile &lt;span class="c"&gt;#make 命令文件&lt;/span&gt;
+&lt;span class="p"&gt;|&lt;/span&gt;——pelicanconf.py &lt;span class="c"&gt;#主要的pelican配置文件&lt;/span&gt;
+&lt;span class="p"&gt;|&lt;/span&gt;——publishconf.py &lt;span class="c"&gt;#发布配置文件,可有可无&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h4&gt;2.文章模板如下：&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;Title: Ubuntu14.04LTS安装Pelican elegant主题
+Date: 2014-05-03
+Category: Ubuntu
+Tags: Ubuntu,Theme
+
+This is my first page.
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h4&gt;3. 编译page&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;make html  &lt;span class="c"&gt;#出现错误,修改pelicanconf.py&lt;/span&gt;
+&lt;span class="nv"&gt;$ &lt;/span&gt;make publish
+&lt;span class="nv"&gt;$ &lt;/span&gt;make serve &lt;span class="c"&gt;#查看 http://localhost:8000&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h4&gt;4.创建一个页面&lt;/h4&gt;
+&lt;p&gt;这里以创建 About页面为例,在content目录创建pages目录&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;mkdir content/pages
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;然后创建About.md并填入下面内容&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;Title: About Me
+Date: 2013-05-03
+
+About me content
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;执行 make html 生成html, 然后打http://localhost:8000查看效果.&lt;/p&gt;
+&lt;h4&gt;5.推送到github网页:&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;cd &lt;/span&gt;output
+&lt;span class="nv"&gt;$ &lt;/span&gt;git init
+&lt;span class="nv"&gt;$ &lt;/span&gt;git add .
+&lt;span class="nv"&gt;$ &lt;/span&gt;git remote add origin  https://github.com/xiaoledeng/xiaoledeng.github.io
+&lt;span class="nv"&gt;$ &lt;/span&gt;git pull origin master
+&lt;span class="nv"&gt;$ &lt;/span&gt;git add .
+&lt;span class="nv"&gt;$ &lt;/span&gt;git commit -m &lt;span class="s2"&gt;&amp;quot;your message&amp;quot;&lt;/span&gt;
+&lt;span class="nv"&gt;$ &lt;/span&gt;git push --force origin master
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;二. 安装pelican-elegant主题:&lt;/h3&gt;
+&lt;p&gt;复制 &lt;a href="http://pan.baidu.com/s/1kTt6GOR"&gt;pelican-elegant-1.3&lt;/a&gt;文件夹到pelican目录下&lt;/p&gt;
+&lt;p&gt;在pelicanconf.py中添加&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;THEME&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;pelican-elegant-1.3&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;然后重新make publish即可&lt;/p&gt;
+&lt;h3&gt;三. 谷歌分析:&lt;/h3&gt;
+&lt;p&gt;去Google Analytics申请账号，记下跟踪ID。
+在pelicanconf.py添加&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;GOOGLE_ANALYTICS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;跟踪ID&amp;#39;&lt;/span&gt; 
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;Reference:&lt;/h2&gt;
+&lt;p&gt;1.&lt;a href="http://blog.csdn.net/zwjlpeng/article/details/16918289"&gt;http://blog.csdn.net/zwjlpeng/article/details/16918289&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;2.&lt;a href="http://blog.csdn.net/zwjlpeng/article/details/18010345"&gt;http://blog.csdn.net/zwjlpeng/article/details/18010345&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;3.&lt;a href="http://www.dongxf.com/3_Build_Personal_Blog_With_Pelican_And_GitHub_Pages.html"&gt;http://www.dongxf.com/3_Build_Personal_Blog_With_Pelican_And_GitHub_Pages.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;4.&lt;a href="http://akenzc.com/how-to-build-a-blog-with-pelican.html"&gt;http://akenzc.com/how-to-build-a-blog-with-pelican.html&lt;/a&gt;&lt;/p&gt;</summary><category term="Ubuntu"></category><category term="Pelican"></category></entry></feed>
